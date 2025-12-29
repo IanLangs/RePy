@@ -1,2 +1,4 @@
-$cc = g++
--a $cc -std=c++17 -Iinclude -Isrc src/main.cc include/preprocess.cc -o RePy
+$cl = g++
+$cw = x86_64-w64-mingw32-g++
+-a $cl -std=c++17 -Iinclude -Isrc src/main.cc include/preprocess.cc -o RePy
+-b $cw -std=c++17 -Isrc -Iinclude src/main.cc include/preprocess.cc -o RePy.exe
