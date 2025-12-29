@@ -1,0 +1,2 @@
+$cc = g++
+-a $cc -std=c++17 -Iinclude -Isrc src/main.cc include/preprocess.cc -o RePy
