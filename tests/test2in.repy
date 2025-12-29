@@ -1,0 +1,5 @@
+"""
+docstring
+"""
+c = `\w+`
+code = c.sub("w", "hello world")

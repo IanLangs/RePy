@@ -1,0 +1,2 @@
+code = `\d+`
+print(code.findall("32876 383 3274"))
