@@ -1,4 +1,5 @@
 #include "preprocess.hpp"
+#include "types.hpp"
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -18,6 +19,9 @@ bool in(T var, vector<T> arr) {
 int main(int argc, char* argv[]) {
     vector range_1_4 = {1,2,3,4};
     bool in_valid_range = in<int>(argc, range_1_4);
+    std::string arg1;
+    if (argc >= 2) arg1 = argv[1];
+    else arg1 = "";
     if (!(in_valid_range)) {
         std::cerr
             << "Usage:\n"
@@ -25,7 +29,7 @@ int main(int argc, char* argv[]) {
             << argv[0] << " <code_file> -e <interpreter>\n";
         return 1;
     }
-    if ((argc == 2 && argv[1] == "-v") || argc == 1) {
+    if ((argc == 2 && arg1 == "-v") || argc == 1) {
         std::cout << "RePy version " << version << "\n";
         return 0;
     }
@@ -43,7 +47,10 @@ int main(int argc, char* argv[]) {
     infile.close();
 
     // --- preprocesar ---
-    std::string processed_code = preprocess_all(code);
+    std::string processed_code = repy::preprocess_all(code);
+    if (!repy::verify_python_types(processed_code)) {
+        return 1;
+    }
 
     // --- modo ejecución ---
     if (argc == 4 && std::string(argv[2]) == "-e") {
@@ -78,7 +85,6 @@ int main(int argc, char* argv[]) {
         std::cerr << "Error opening output file: " << argv[2] << "\n";
         return 1;
     }
-
     outfile << processed_code;
     outfile.close();
 

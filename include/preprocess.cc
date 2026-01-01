@@ -7,6 +7,8 @@
 #include <vector>
 #include <cctype>
 
+namespace repy {
+
 std::vector<std::string> split_python_docstring(const std::string& src) {
     size_t i = 0;
     const size_t n = src.size();
@@ -77,4 +79,6 @@ std::string preprocess_all(const std::string& code) {
     }
 
     return out;
+}
+
 }
